@@ -1,0 +1,360 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     14391,        351]
+NotebookOptionsPosition[     13372,        314]
+NotebookOutlinePosition[     13736,        330]
+CellTagsIndexPosition[     13693,        327]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<SubKernels`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"numKern", "=", 
+   RowBox[{"ToExpression", "[", 
+    RowBox[{"Environment", "[", "\"\<SLURM_CPUS_PER_TASK\>\"", "]"}], "]"}]}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"LaunchKernels", "[", "numKern", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"OutputForm", "[", 
+    RowBox[{"\"\<Number of Parallel Kernels:\>\"", "<>", 
+     RowBox[{"ToString", "[", "$KernelCount", "]"}]}], "]"}], "]"}], 
+  ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.892576639111906*^9, 3.892576668528636*^9}, 
+   3.8972243448273306`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Replace", " ", "second", " ", "entry", " ", "of", " ", 
+     RowBox[{"FileNames", "[", 
+      RowBox[{"\"\<files\>\"", ",", "\"\<directory\>\""}], "]"}], " ", "with",
+      " ", "either"}], ",", " ", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], " ", "or", " ", "the", " ", 
+     "absolute", " ", "path", " ", "to", " ", "the", " ", "folder", " ", 
+     "containing", " ", 
+     RowBox[{"the", " ", ".", "mx"}], " ", "files"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"node", "=", "8"}], ";"}], "     ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Breaking", " ", "the", " ", "data", " ", "up", " ", "among", " ", "8", 
+     " ", "separate", " ", 
+     RowBox[{"nodes", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"files", "=", 
+     RowBox[{"FileNames", "[", 
+      RowBox[{
+       RowBox[{"\"\<6OmegaSols\>\"", "<>", 
+        RowBox[{"ToString", "[", "node", "]"}], "<>", "\"\<.mx\>\""}], ",", 
+       "\"\</scratch/user/bradyns/\>\""}], "]"}]}], ";"}], " "}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.892301842245664*^9, 3.89230184735472*^9}, {
+   3.892302372755672*^9, 3.8923024328063955`*^9}, {3.8923024751715574`*^9, 
+   3.8923024766013517`*^9}, {3.892302506621443*^9, 3.8923027924440155`*^9}, {
+   3.892302824214733*^9, 3.892302843153517*^9}, {3.892309646090736*^9, 
+   3.8923096802102165`*^9}, {3.8923098749245033`*^9, 
+   3.8923100378159246`*^9}, {3.8925665996135*^9, 3.8925666487002892`*^9}, 
+   3.892570171460951*^9, {3.8925748110901675`*^9, 3.892574833816305*^9}, {
+   3.8925764397212296`*^9, 3.8925764594443755`*^9}, {3.8925765078335285`*^9, 
+   3.8925765674546537`*^9}, {3.8925766338247433`*^9, 
+   3.8925766349508066`*^9}, {3.8925772783336396`*^9, 
+   3.8925772784805713`*^9}, {3.892577351637677*^9, 3.892577445240654*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "Decided", " ", "to", " ", "flatten", " ", "and", " ", "delete", " ", 
+   "duplicates", " ", "before", " ", "sending", " ", "to", " ", "the", " ", 
+   RowBox[{"cluster", ".", " ", "The"}], " ", "output", " ", "was", " ", 
+   "exported", " ", "to", " ", "a", " ", "new", " ", "file", " ", "which", 
+   " ", "can", " ", "be", " ", "There", " ", "are", " ", "12646", " ", 
+   "unique", " ", "solutions", " ", "after", " ", "deleting", " ", 
+   RowBox[{"duplicates", ".", " ", "To"}], " ", "automate", " ", "the", " ", 
+   "process", " ", "the", " ", "last", " ", "6", " ", "of", " ", "these", " ",
+    "equations", " ", "have", " ", "already", " ", "been", " ", "evaluated", 
+   " ", "and", " ", "returned", " ", "with", " ", "no", " ", 
+   RowBox[{"solution", "."}]}], " ", "*)"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.892568768832907*^9, 3.8925687694580555`*^9}, {
+  3.8925689815365973`*^9, 3.892568999908281*^9}, {3.8925690346563373`*^9, 
+  3.8925690890343976`*^9}, {3.8925738121665697`*^9, 3.8925738409175215`*^9}, {
+  3.8925744293537235`*^9, 3.8925745166178074`*^9}, {3.892574578082713*^9, 
+  3.89257463295896*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"omegas", "=", 
+   RowBox[{"Import", "/@", "files"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.892576488776515*^9, 3.8925764983867116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"omegas", "=", 
+    RowBox[{"DeleteDuplicates", "[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Import", "/@", "files"}], "]"}], "]"}]}], ";"}], 
+  "*)"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.892302899204895*^9, 3.892303012302246*^9}, {
+  3.8923095871637526`*^9, 3.892309598703168*^9}, {3.8923112581106772`*^9, 
+  3.8923112617015123`*^9}, {3.8923113469461446`*^9, 3.8923113529325*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"It", "'"}], "s", " ", "easier", " ", "to", " ", "just", " ", 
+     "flatten", " ", "and", " ", "delete", " ", "the", " ", "duplicates", " ",
+      "while", " ", "importing", " ", "into", " ", "this", " ", "omegas", " ",
+      "object"}], ",", " ", "however", ",", "\[IndentingNewLine]", 
+    RowBox[{"if", " ", "you", " ", 
+     RowBox[{"don", "'"}], "t", " ", "then", " ", "for", " ", "reference", 
+     " ", "the", " ", "structure", " ", "of", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"omegas", " ", "=", " ", 
+        RowBox[{"Import", "/@", "files"}]}], ";"}], ")"}], " ", "is"}], ",", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"omegas", "[", 
+      RowBox[{"[", "fnumb", "]"}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"loopnumb", ",", "solnumb", ",", "1"}], "]"}], "]"}], ",", " ", 
+    "where", ",", "\[IndentingNewLine]", "\t", 
+    RowBox[{"fnumb", " ", "=", " ", "\"\<number of .mx files imported\>\""}], 
+    ",", "\[IndentingNewLine]", "\t", 
+    RowBox[{
+    "loopnumb", " ", "=", " ", 
+     "\"\<number of loops \[Element][1,20] before exporting to the \
+file\>\""}], ",", " ", "\[IndentingNewLine]", "\t", 
+    RowBox[{
+    "solnumb", " ", "=", " ", 
+     "\"\<number of independent solutions stored in the file indexed by fnumb\
+\>\""}], ",", "\[IndentingNewLine]", "\t", 
+    RowBox[{
+    "and", " ", "the", " ", "1", " ", "in", " ", "the", " ", "last", " ", 
+     "spot", " ", "removes", " ", "the", " ", "brackets"}], ",", " ", 
+    RowBox[{"{", " ", "solution", " ", "}"}], ",", " ", 
+    RowBox[{"around", " ", "the", " ", 
+     RowBox[{"solution", "."}]}]}], " ", "*)"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8923030242368455`*^9, 3.8923031878579845`*^9}, 
+   3.8923096076226587`*^9, {3.8923097198873177`*^9, 3.8923098073023834`*^9}, {
+   3.8923100534026346`*^9, 3.892310245969502*^9}, {3.892310277281766*^9, 
+   3.892310486530161*^9}, {3.8923105352663507`*^9, 3.89231054726792*^9}, {
+   3.8923105820782075`*^9, 3.892310640738227*^9}, {3.892310690946907*^9, 
+   3.8923110305314627`*^9}, {3.8923110867990713`*^9, 
+   3.8923111729772873`*^9}, {3.892311251214662*^9, 3.8923114964935493`*^9}, 
+   3.892576630428256*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vars", "=", 
+   RowBox[{"Variables", "[", "omegas", "]"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{3.8923946461732936`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Still", " ", "looking", " ", "for", " ", "a", " ", "faster", " ", "way", 
+    " ", "to", " ", "do", " ", 
+    RowBox[{"this", ".", " ", "Another"}], " ", "method", " ", "of", " ", 
+    "filtering", " ", "out", " ", "equations", " ", "with", " ", "null", " ", 
+    "solutions", " ", "would", " ", "be", " ", 
+    RowBox[{"helpful", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"kmax", "=", "10"}], ";"}], "     ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Number", " ", "of", " ", "times", " ", "to", " ", "collect", " ", 
+     "output", " ", "form", " ", "parallel", " ", 
+     RowBox[{"kernels", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sublen", "=", "158"}], ";"}], "    ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "The", " ", "number", " ", "of", " ", "equations", " ", "to", " ", "send",
+      " ", "out", " ", "to", " ", "all", " ", "parallel", " ", 
+     RowBox[{"kernels", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DistributeDefinitions", "[", 
+     RowBox[{"omegas", ",", "vars"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sols", "=", 
+     RowBox[{"{", "}"}]}], ";"}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8925725523461046`*^9, 3.892572554025926*^9}, {
+  3.892572585248536*^9, 3.8925725928798885`*^9}, {3.8925728200959935`*^9, 
+  3.892572860899827*^9}, {3.892572892491076*^9, 3.8925728960800076`*^9}, {
+  3.8925729855182133`*^9, 3.8925729856782026`*^9}, {3.8925733941156316`*^9, 
+  3.8925734348434896`*^9}, {3.8925738502296314`*^9, 3.8925739127732277`*^9}, {
+  3.892574261494361*^9, 3.892574387533449*^9}, {3.89257654226513*^9, 
+  3.892576543147026*^9}, {3.892576941755226*^9, 3.8925769421055927`*^9}, {
+  3.8925771926267776`*^9, 3.8925771931596756`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sols", "=", 
+   RowBox[{"Reap", "[", 
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{"Block", "[", 
+       RowBox[{
+        RowBox[{"{", "res", "}"}], ",", 
+        RowBox[{
+         RowBox[{"res", "=", 
+          RowBox[{"ParallelTable", "[", 
+           RowBox[{
+            RowBox[{"TimeConstrained", "[", 
+             RowBox[{
+              RowBox[{"Solve", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"omegas", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", "6"}], ",", 
+                "vars", ",", "Integers"}], "]"}], ",", "60", ",", "i"}], 
+             "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", 
+              RowBox[{"1", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"num", "-", "1"}], ")"}], "*", "sublen"}]}], ",", 
+              RowBox[{"num", "*", "sublen"}]}], "}"}]}], "]"}]}], ";", 
+         RowBox[{"Sow", "[", 
+          RowBox[{
+           RowBox[{"Flatten", "[", "res", "]"}], ",", "num"}], "]"}]}]}], 
+       "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"num", ",", "kmax"}], "}"}]}], "]"}], "]"}]}], ";", 
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"\"\</scratch/user/bradyns/6OmegasReducedSols\>\"", "<>", 
+     RowBox[{"ToString", "[", 
+      RowBox[{"1", "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"node", "-", "1"}], ")"}], "kmax", "*", "sublen"}]}], "]"}], 
+     "<>", "\"\<to\>\"", "<>", 
+     RowBox[{"ToString", "[", 
+      RowBox[{"node", "*", "kmax", "*", "sublen"}], "]"}], "<>", 
+     "\"\<.m\>\""}], ",", 
+    RowBox[{"Flatten", "[", "sols", "]"}]}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8925591957655*^9, 3.892559256720641*^9}, {
+   3.8925592882442436`*^9, 3.892559351149151*^9}, {3.892559391626872*^9, 
+   3.892559564782386*^9}, {3.892559618068693*^9, 3.892559664740384*^9}, {
+   3.8925609965369787`*^9, 3.8925609967164383`*^9}, {3.8925611355860057`*^9, 
+   3.8925611668872643`*^9}, {3.8925615098971443`*^9, 
+   3.8925615644440255`*^9}, {3.89256164319466*^9, 3.892561661169118*^9}, {
+   3.8925626558376827`*^9, 3.8925626700199404`*^9}, {3.892562786423647*^9, 
+   3.892562812357977*^9}, {3.892563009263688*^9, 3.8925630124575024`*^9}, {
+   3.892563170938573*^9, 3.89256318989109*^9}, {3.892563366510909*^9, 
+   3.8925633678300533`*^9}, {3.8925637576283765`*^9, 
+   3.8925637966779914`*^9}, {3.8925640361118855`*^9, 3.8925640372834578`*^9}, 
+   3.892564394088812*^9, {3.892564433261043*^9, 3.892564437264675*^9}, {
+   3.892564643144559*^9, 3.8925646432991476`*^9}, {3.8925663738401875`*^9, 
+   3.8925663814368553`*^9}, 3.892566426924577*^9, {3.8925725399246855`*^9, 
+   3.8925725826067533`*^9}, {3.8925727895111513`*^9, 3.892572793099575*^9}, {
+   3.8925728754233627`*^9, 3.8925728764461427`*^9}, {3.8925730136054907`*^9, 
+   3.8925731113768344`*^9}, 3.8925760884269457`*^9, {3.8925762198193645`*^9, 
+   3.8925763158230777`*^9}, {3.892576379907379*^9, 3.892576404695515*^9}, {
+   3.8925768051046667`*^9, 3.892576833915693*^9}, {3.8925769102486005`*^9, 
+   3.892576960546863*^9}, {3.892577039211822*^9, 3.892577048459302*^9}, {
+   3.8925783941190352`*^9, 3.892578398583439*^9}, {3.897305484416048*^9, 
+   3.8973054846213927`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Print", "[", "\"\<Finished Program!\>\"", "]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8925771293164167`*^9, 3.8925771718556566`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CloseKernels", "[", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8946457673299913`*^9, 3.8946457747818213`*^9}, 
+   3.897224362362423*^9}],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8946457673299913`*^9, 3.8946457747818213`*^9}, {
+  3.897224362362423*^9, 3.8972243639847145`*^9}}]
+},
+WindowSize->{1020, 720},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+ShowSelection->True,
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 724, 20, 92, "Input",
+ InitializationCell->True],
+Cell[1284, 42, 1927, 40, 112, "Input",
+ InitializationCell->True],
+Cell[3214, 84, 1187, 19, 92, "Input",
+ InitializationCell->True],
+Cell[4404, 105, 201, 5, 31, "Input",
+ InitializationCell->True],
+Cell[4608, 112, 463, 11, 31, "Input",
+ InitializationCell->True],
+Cell[5074, 125, 2327, 48, 192, "Input",
+ InitializationCell->True],
+Cell[7404, 175, 183, 5, 31, "Input",
+ InitializationCell->True],
+Cell[7590, 182, 1895, 40, 152, "Input",
+ InitializationCell->True],
+Cell[9488, 224, 3291, 70, 152, "Input",
+ InitializationCell->True],
+Cell[12782, 296, 179, 3, 31, "Input",
+ InitializationCell->True],
+Cell[12964, 301, 201, 5, 31, "Input",
+ InitializationCell->True],
+Cell[13168, 308, 200, 4, 31, "Input",
+ InitializationCell->True]
+}
+]
+*)
+
+(* End of internal cache information *)
